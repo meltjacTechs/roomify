@@ -10,6 +10,13 @@ const Navbar = () => {
 
             <span className="name">Roomify</span>
           </div>
+
+          <ul className="links">
+            <a href="#">Product</a>
+            <a href="#">Pricing</a>
+            <a href="#">Community</a>
+            <a href="#">Enterprise</a>
+          </ul>
         </div>
       </nav>
     </header>
