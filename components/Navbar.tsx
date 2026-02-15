@@ -7,6 +7,8 @@ const Navbar = () => {
         <div className="left">
           <div className="brand">
             <Box className="logo"/>
+
+            <span className="name">Roomify</span>
           </div>
         </div>
       </nav>
