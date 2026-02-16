@@ -9,6 +9,7 @@ import {
 
 import type { Route } from "./+types/root";
 import "./app.css";
+import type { Auth } from "@heyputer/puter.js";
 
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -39,6 +40,12 @@ export function Layout({ children }: { children: React.ReactNode }) {
       </body>
     </html>
   );
+}
+
+const DEFAULT_AUTH_STATE : Authstate = {
+  isSignedIn: false,
+  userName: null,
+  userId: null,
 }
 
 export default function App() {
