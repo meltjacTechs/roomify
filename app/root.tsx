@@ -11,7 +11,11 @@ import type { Route } from "./+types/root";
 import "./app.css";
 import type { Auth } from "@heyputer/puter.js";
 import { useEffect, useState } from "react";
-import { getCurrentUser } from "lib/puter.action";
+import { 
+  getCurrentUser,
+  signIn as puterSignIn,
+  signOut as puterSignOut, 
+} from "lib/puter.action";
 
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -73,8 +77,23 @@ export default function App() {
     refreshAuth();
   }, []);
 
-  const signIn = async () => {}
-  return <Outlet />;
+  const signIn = async () => {
+    await puterSignIn();
+    return await refreshAuth();
+  }
+
+   const signOut = async () => {
+    puterSignOut();
+    return await refreshAuth();
+  }
+
+  return (
+    <main className="min-h-screen bg-background text-foreground relative z-10">
+      <Outlet 
+        context={{ ... authState, refreshAuth, signIn, signOut }}
+      />
+    </main>
+  );  
 }
 
 export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
