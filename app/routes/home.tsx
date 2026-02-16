@@ -23,6 +23,8 @@ export default function Home() {
 
                   <p>Introducing Roomify 2.0</p>
               </div>
+
+              <h1>Build beautiful spaces at the speed of thought with Roomify</h1>
   </section>
     </div>
   );
