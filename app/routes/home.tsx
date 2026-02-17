@@ -56,7 +56,17 @@ export default function Home() {
                   <p>Upload images</p>
                 </div>
               </div>
+  </section>
 
+  <section className="projects">
+    <div className="section-inner">
+      <div className="section-head">
+        <div className="copy">
+          <h2>Projects</h2>
+          <p>Your latest work and shared community projects all in one place.</p>
+        </div>
+      </div>
+    </div>
   </section>
     </div>
   );
