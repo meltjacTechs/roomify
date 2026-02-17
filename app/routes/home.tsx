@@ -41,6 +41,15 @@ export default function Home() {
                       Watch Demo
                   </Button>
               </div>
+              <div id="upload" className="upload-shell">
+                <div className="grid-overlay" />
+                  <div>
+                    
+                  </div>
+                <div className="upload-card">
+                  <div className="upload-head"></div>
+                </div>
+              </div>
 
   </section>
     </div>
