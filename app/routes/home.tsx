@@ -1,6 +1,7 @@
 import type { Route } from "./+types/home";
 import Navbar from "components/Navbar";
 import Button from "components/ui/Button";
+import Upload from "components/Upload";
 import { ArrowRight, ArrowUpRight, Clock, Layers } from "lucide-react";
 
 
@@ -53,7 +54,7 @@ export default function Home() {
                     <p>Support JPG, PNG formats up to 10MB</p>
                   </div>
 
-                  <p>Upload images</p>
+                  <Upload />
                 </div>
               </div>
   </section>
