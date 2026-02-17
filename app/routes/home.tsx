@@ -66,6 +66,13 @@ export default function Home() {
           <p>Your latest work and shared community projects all in one place.</p>
         </div>
       </div>
+      <div className="projects-grid">
+        <div className="project-card group">
+          <div className="preview">
+
+          </div>
+        </div>
+      </div>
     </div>
   </section>
     </div>
