@@ -69,7 +69,9 @@ export default function Home() {
       <div className="projects-grid">
         <div className="project-card group">
           <div className="preview">
-
+            <img
+            src="https://roomify-mlhuk267-dfwu1i.puter.site/projects/1770803585402/rendered.png" 
+            />
           </div>
         </div>
       </div>
