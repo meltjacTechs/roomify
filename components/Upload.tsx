@@ -23,6 +23,7 @@ const Upload = () => {
                 <div className="drop-icon">
                     <UploadIcon size={20} />
                 </div>
+                <p>{isSignedIn ? ("Click to upload or just drag and drop") : ("Please sign in or sign up with Puter to upload")}</p>
             </div>
         </div>
       ): (
