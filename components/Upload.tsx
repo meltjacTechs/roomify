@@ -24,6 +24,7 @@ const Upload = () => {
                     <UploadIcon size={20} />
                 </div>
                 <p>{isSignedIn ? ("Click to upload or just drag and drop") : ("Please sign in or sign up with Puter to upload")}</p>
+                <p className="help">Maximum file size 50MB</p>
             </div>
         </div>
       ): (
