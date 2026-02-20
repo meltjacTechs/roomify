@@ -5,7 +5,7 @@ import { CheckCircle, CheckCircle2, ImageIcon, Upload as UploadIcon } from 'luci
 const Upload = () => {
     const [file, setFile] = useState<File | null>(null);
     const [isDragging, setIsDragging] = useState(false);
-    const [progres, setProgress] = useState(0);
+    const [progress, setProgress] = useState(0);
 
     const { isSignedIn} = useOutletContext<AuthContext>();
   return (
@@ -39,7 +39,7 @@ const Upload = () => {
               </div>
               <h3>{file.name}</h3>
               <div className="progress">
-                <div className="bar" stle={{width: `${progress}`}}></div>
+                <div className="bar" style={{width: `${progress}%`}}></div>
               </div>
             </div>
         </div>
