@@ -1,30 +1,49 @@
-import { Box } from "lucide-react";
+import {Box} from "lucide-react";
 import Button from "./ui/Button";
+import {useOutletContext} from "react-router";
 
 const Navbar = () => {
-  const isSignedIn = false;
-  const userName = "manuel";
+    const { isSignedIn, userName, signIn, signOut } = useOutletContext<AuthContext>()
 
-  const handleAuthClick = async () => {}
+    const handleAuthClick = async () => {
+        if(isSignedIn) {
+            try {
+                await signOut();
+            } catch (e) {
+                console.error(`Puter sign out failed: ${e}`);
+            }
 
-  return (
-    <header className="navbar">
-      <nav className="inner">
-        <div className="left">
-          <div className="brand">
-            <Box className="logo"/>
+            return;
+        }
 
-            <span className="name">Roomify</span>
-          </div>
+        try {
+            await signIn();
+        } catch (e) {
+            console.error(`Puter sign in failed: ${e}`);
+        }
+    };
 
-          <ul className="links">
-            <a href="#">Product</a>
-            <a href="#">Pricing</a>
-            <a href="#">Community</a>
-            <a href="#">Enterprise</a>
-          </ul>
-        </div>
-          <div className="actions">
+    return (
+        <header className="navbar">
+            <nav className="inner">
+                <div className="left">
+                    <div className="brand">
+                        <Box  className="logo" />
+
+                        <span className="name">
+                            Roomify
+                        </span>
+                    </div>
+
+                    <ul className="links">
+                        <a href="#">Product</a>
+                        <a href="#">Pricing</a>
+                        <a href="#">Community</a>
+                        <a href="#">Enterprise</a>
+                    </ul>
+                </div>
+
+                <div className="actions">
                     {isSignedIn ? (
                         <>
                             <span className="greeting">
@@ -45,9 +64,9 @@ const Navbar = () => {
                         </>
                     )}
                 </div>
-      </nav>
-    </header>
-  );
+            </nav>
+        </header>
+    )
 }
 
-export default Navbar;
+export default Navbar
