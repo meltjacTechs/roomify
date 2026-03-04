@@ -105,7 +105,7 @@ export default function Home() {
                           </div>
 
                           <h3>Upload your floor plan</h3>
-                          <p>Supports JPG, PNG, formats up to 10MB</p>
+                          <p>Supports JPG and PNG formats up to 10MB</p>
                       </div>
 
                       <Upload onComplete={handleUploadComplete} />
@@ -124,7 +124,7 @@ export default function Home() {
 
                   <div className="projects-grid">
                       {projects.map(({id, name, renderedImage, sourceImage, timestamp}) => (
-                          <div key={id} className="project-card group" onClick={() => navigate(`/visualizer/${id}`)}>
+                          <div key={id} className="project-card group" role="button" tabIndex={0} onClick={() => navigate(`/visualizer/${id}`)} onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && navigate(`/visualizer/${id}`)}>
                               <div className="preview">
                                   <img  src={renderedImage || sourceImage} alt="Project"
                                   />

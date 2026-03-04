@@ -43,8 +43,11 @@ export const uploadImageToHosting = async ({ hosting, url, projectId, label }: S
 
         const contentType = resolved.contentType || resolved.blob.type || '';
         const ext = getImageExtension(contentType, url);
-        const dir = `projects/${projectId}`;
-        const filePath = `${dir}/${label}.${ext}`;
+        const sanitize = (s: string) => s.replace(/[^a-zA-Z0-9_-]/g, '_');
+        const safeProjectId = sanitize(projectId);
+        const safeLabel = sanitize(label);
+        const dir = `projects/${safeProjectId}`;
+        const filePath = `${dir}/${safeLabel}.${ext}`;
 
         const uploadFile = new File([resolved.blob], `${label}.${ext}`, {
             type: contentType,

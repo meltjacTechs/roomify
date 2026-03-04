@@ -7,12 +7,16 @@ interface UploadProps {
     onComplete?: (base64Data: string) => void;
 }
 
+const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB
+const ALLOWED_TYPES = ['image/jpeg', 'image/png'];
+
 const Upload = ({ onComplete }: UploadProps) => {
     const [file, setFile] = useState<File | null>(null);
     const [isDragging, setIsDragging] = useState(false);
     const [progress, setProgress] = useState(0);
-    const intervalRef = useRef<NodeJS.Timeout | null>(null);
-    const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+    const [error, setError] = useState<string | null>(null);
+    const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+    const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
     const { isSignedIn } = useOutletContext<AuthContext>();
 
@@ -31,6 +35,15 @@ const Upload = ({ onComplete }: UploadProps) => {
 
     const processFile = useCallback((file: File) => {
         if (!isSignedIn) return;
+        if (!ALLOWED_TYPES.includes(file.type)) {
+            setError('Only JPG and PNG files are supported.');
+            return;
+        }
+        if (file.size > MAX_FILE_SIZE) {
+            setError('File size must not exceed 10MB.');
+            return;
+        }
+        setError(null);
 
         setFile(file);
         setProgress(0);
@@ -81,8 +94,7 @@ const Upload = ({ onComplete }: UploadProps) => {
         if (!isSignedIn) return;
 
         const droppedFile = e.dataTransfer.files[0];
-        const allowedTypes = ['image/jpeg', 'image/png'];
-        if (droppedFile && allowedTypes.includes(droppedFile.type)) {
+        if (droppedFile && ALLOWED_TYPES.includes(droppedFile.type) && droppedFile.size <= MAX_FILE_SIZE) {
             processFile(droppedFile);
         }
     };
@@ -108,7 +120,7 @@ const Upload = ({ onComplete }: UploadProps) => {
                     <input
                         type="file"
                         className="drop-input"
-                        accept=".jpg,.jpeg,.png,.webp"
+                        accept=".jpg,.jpeg,.png"
                         disabled={!isSignedIn}
                         onChange={handleChange}
                     />
@@ -122,7 +134,8 @@ const Upload = ({ onComplete }: UploadProps) => {
                                 "Click to upload or just drag and drop"
                             ): ("Sign in or sign up with Puter to upload")}
                         </p>
-                        <p className="help">Maximum file size 50 MB.</p>
+                        <p className="help">Maximum file size 10MB.</p>
+                        {error && <p className="help error">{error}</p>}
                     </div>
                 </div>
             ) : (
